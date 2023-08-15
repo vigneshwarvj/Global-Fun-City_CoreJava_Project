@@ -1,5 +1,7 @@
+CREATE DATABASE IF NOT EXISTS java_project_2;
 
-USE java_project;
+USE java_project_2;
+
 -- User
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,31 +40,8 @@ CREATE TABLE tickets (
     FOREIGN KEY (children_price) REFERENCES ticketprices (ticket_price_id)
 );
 
--- Rooms
+-- rooms
 CREATE TABLE rooms (
-    room_id INT AUTO_INCREMENT PRIMARY KEY,
-    hotel_name VARCHAR(255) NOT NULL,
-    room_name VARCHAR(255) NOT NULL,
-    no_of_beds INT NOT NULL,
-    price INT NOT NULL
-);
-
-
-
-CREATE TABLE rooms (
-    ticket_id INT NOT NULL,
-    FOREIGN KEY (ticket_id) REFERENCES tickets (ticket_id),
-    room_id INT AUTO_INCREMENT PRIMARY KEY,
-    hotel_name VARCHAR(255) NOT NULL,
-    room_name VARCHAR(255) NOT NULL,
-    no_of_beds INT NOT NULL,
-    price INT NOT NULL
-);
-
-
-CREATE TABLE rooms (
-    ticket_id INT NOT NULL,
-    FOREIGN KEY (ticket_id) REFERENCES tickets (ticket_id),
     room_id INT AUTO_INCREMENT PRIMARY KEY,
     hotel_name VARCHAR(255) NOT NULL,
     room_name VARCHAR(255) NOT NULL,

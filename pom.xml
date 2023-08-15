@@ -12,8 +12,7 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 
-		<sonar.projectKey>
-			fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2</sonar.projectKey>
+		<sonar.projectKey>fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2</sonar.projectKey>
 		<sonar.organization>fssa-batch3</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
@@ -41,6 +40,7 @@
 			<version>5.7.0</version>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>java-dotenv</artifactId>

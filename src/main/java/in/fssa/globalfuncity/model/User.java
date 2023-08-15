@@ -1,5 +1,5 @@
 package in.fssa.globalfuncity.model;
 
-public class User {
+public class User extends UserEntity{
 
 }
