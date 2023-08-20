@@ -12,7 +12,13 @@ public class UserValidator {
 	private static final String NAME_PATTERN = "^[A-Za-z][A-Za-z\\\\s]*$";
 	private static final String EMAIL_PATTERN = "^[a-zA-Z0-9]+([a-zA-Z0-9_+\\-\\. ]*[a-zA-Z0-9]+)?@[a-zA-Z0-9]+([a-zA-Z0-9\\-\\.]*[a-zA-Z0-9])?\\.[a-zA-Z]{2,}$";
 	private static final String PASSWORD_PATTERN = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
-
+	
+	/**
+	 * 
+	 * @param user
+	 * @throws ValidationException
+	 */
+	
 	//Checking whether user object null or not.
 	public static void Validate(User user) throws ValidationException {
 		if (user == null) {
@@ -26,6 +32,12 @@ public class UserValidator {
 		validatePhoneNumber(user.getPhoneNumber());
 	}
 	
+	/**
+	 * 
+	 * @param userId
+	 * @throws ValidationException
+	 */
+	
 	//UserID Validation
 	public static void validateId(int userId) throws ValidationException{
 		if(userId <= 0) {
@@ -33,15 +45,26 @@ public class UserValidator {
 		}
 	}
 
+	/**
+	 * 
+	 * @param firstName
+	 * @throws ValidationException
+	 */
+	
 	//FirstName Validation
 	public static void validateFirstName(String firstName) throws ValidationException {
 		StringUtil.rejectIfInvalidString(firstName, "First Name");
 		if (!Pattern.matches(NAME_PATTERN, firstName)) {
 			throw new ValidationException("First Name doesn't match the pattern");
 		}
-		
 	}
 
+	/**
+	 * 
+	 * @param middleName
+	 * @throws ValidationException
+	 */
+	
 	//MiddleName Validation
 	public static void validateMiddleName(String middleName) throws ValidationException {
 		StringUtil.rejectIfInvalidString(middleName, "Middle Name");
@@ -51,6 +74,12 @@ public class UserValidator {
 		
 	}
 
+	/**
+	 * 
+	 * @param lastName
+	 * @throws ValidationException
+	 */
+	
 	//LastName Validation
 	public static void validateLastName(String lastName) throws ValidationException {
 		StringUtil.rejectIfInvalidString(lastName, "Last Name");
@@ -60,6 +89,12 @@ public class UserValidator {
 		
 	}
 	
+	/**
+	 * 
+	 * @param email
+	 * @throws ValidationException
+	 */
+	
 	//Email Validation
 	public static void validateEmail(String email) throws ValidationException {
 		StringUtil.rejectIfInvalidString(email, "Email");
@@ -68,6 +103,12 @@ public class UserValidator {
 		}
 	}
 
+	/**
+	 * 
+	 * @param password
+	 * @throws ValidationException
+	 */
+	
 	//Password Validation
 	public static void validatePassword(String password) throws ValidationException {
 		StringUtil.rejectIfInvalidString(password, "Password");
@@ -80,6 +121,12 @@ public class UserValidator {
 		}
 	}
 
+	/**
+	 * 
+	 * @param phoneNumber
+	 * @throws ValidationException
+	 */
+	
 	//PhoneNumber Validation
 	public static void validatePhoneNumber(long phoneNumber) throws ValidationException {
 	    String phoneNumberStr = String.valueOf(phoneNumber);

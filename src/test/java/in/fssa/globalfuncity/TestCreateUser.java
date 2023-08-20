@@ -105,6 +105,111 @@ public class TestCreateUser {
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 
+	//Middlename Null
+	@Test
+	public void testCreateUserWithMiddleNameNull() {
+		UserService userService = new UserService();
+		User newUser = new User();
+        newUser.setFirstName("Sam");
+        newUser.setMiddleName(null);
+        newUser.setLastName("S");
+		newUser.setEmail("sam@gmail.com");
+		newUser.setPassword("Sam@2303");
+		newUser.setPhoneNumber(9923456787L);
+
+		Exception exception = assertThrows(Exception.class, () -> {
+			userService.create(newUser);
+		});
+		String expectedMessage = "Middle Name cannot be null or empty";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
+	//MiddleName Empty
+	@Test
+	public void testCreateUserWithMiddleNameEmpty() {
+		UserService userService = new UserService();
+		User newUser = new User();
+        newUser.setFirstName("Sam");
+        newUser.setMiddleName("");
+        newUser.setLastName("S");
+		newUser.setEmail("sam@gmail.com");
+		newUser.setPassword("Sam@2303");
+		newUser.setPhoneNumber(9923456787L);
+
+		Exception exception = assertThrows(Exception.class, () -> {
+			userService.create(newUser);
+		});
+		String expectedMessage = "Middle Name cannot be null or empty";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
+	//MiddleName Pattern
+	@Test
+	public void testCreateUserWithMiddleNamePattern() {
+		UserService userService = new UserService();
+		User newUser = new User();
+        newUser.setFirstName("sam");
+        newUser.setMiddleName("Ganesh123");
+        newUser.setLastName("S");
+		newUser.setEmail("sam@gmail.com");
+		newUser.setPassword("Sam@2303");
+		newUser.setPhoneNumber(9923456787L);
+
+		Exception exception = assertThrows(Exception.class, () -> {
+			userService.create(newUser);
+		});
+		String expectedMessage = "Middle Name doesn't match the pattern";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
+	//Lastname Null
+	@Test
+	public void testCreateUserWithLastNameNull() {
+		UserService userService = new UserService();
+		User newUser = new User();
+        newUser.setFirstName("Sam");
+        newUser.setMiddleName("ganesh");
+        newUser.setLastName(null);
+		newUser.setEmail("sam@gmail.com");
+		newUser.setPassword("Sam@2303");
+		newUser.setPhoneNumber(9923456787L);
+
+		Exception exception = assertThrows(Exception.class, () -> {
+			userService.create(newUser);
+		});
+		String expectedMessage = "Last Name cannot be null or empty";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
+	//LastName Empty
+	@Test
+	public void testCreateUserWithLastNameEmpty() {
+		UserService userService = new UserService();
+		User newUser = new User();
+        newUser.setFirstName("Sam");
+        newUser.setMiddleName("ganesh");
+        newUser.setLastName("");
+		newUser.setEmail("sam@gmail.com");
+		newUser.setPassword("Sam@2303");
+		newUser.setPhoneNumber(9923456787L);
+
+		Exception exception = assertThrows(Exception.class, () -> {
+			userService.create(newUser);
+		});
+		String expectedMessage = "Last Name cannot be null or empty";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
 	//Email Null
 	@Test
 	public void testCreateUserWithEmailNull() {
@@ -127,7 +232,7 @@ public class TestCreateUser {
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 
-	//Email Null
+	//Email Empty
 	@Test
 	public void testCreateUserWithEmailEmpty() {
 		UserService userService = new UserService();

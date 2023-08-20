@@ -8,7 +8,13 @@ import in.fssa.globalfuncity.validator.UserExists;
 import in.fssa.globalfuncity.validator.UserValidator;
 
 public class UserService {
-
+	/**
+	 * 
+	 * @param newUser
+	 * @throws ValidationException
+	 * @throws PersistenceException
+	 * @return
+	 */
 	public void create(User newUser) throws ValidationException, PersistenceException{
 		UserValidator.Validate(newUser);
 		UserExists.emailExists(newUser.getEmail());
@@ -16,6 +22,14 @@ public class UserService {
 		userDao.create(newUser);
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @param updatedUser
+	 * @throws ValidationException
+	 * @throws PersistenceException
+	 * @return
+	 */
 	public void update(int id, User updatedUser) throws ValidationException, PersistenceException {
 		UserValidator.validateId(id);
 		UserExists.checkIdExists(id);

@@ -10,6 +10,11 @@ import in.fssa.globalfuncity.util.ConnectionUtil;
 
 public class UserExists {
 
+	/**
+	 * 
+	 * @param email
+	 * @throws ValidationException
+	 */
 	public static void emailExists(String email) throws ValidationException {
 		
 		Connection conn = null;
@@ -40,6 +45,11 @@ public class UserExists {
 		
 	}
    
+	/**
+	 * 
+	 * @param id
+	 * @throws ValidationException
+	 */
 	public static void checkIdExists(int id) throws ValidationException {
 		
 		Connection conn = null;
@@ -70,6 +80,11 @@ public class UserExists {
 		
 	}
 	
+	/**
+	 * 
+	 * @param email
+	 * @throws ValidationException
+	 */
 	public static void checkEmailExists(String email) throws ValidationException {
 		
 		Connection conn = null;

@@ -1,0 +1,8 @@
+in.fssa.globalfuncity.dao
+in.fssa.globalfuncity.dto
+in.fssa.globalfuncity.exception
+in.fssa.globalfuncity.interfaces
+in.fssa.globalfuncity.model
+in.fssa.globalfuncity.service
+in.fssa.globalfuncity.util
+in.fssa.globalfuncity.validator

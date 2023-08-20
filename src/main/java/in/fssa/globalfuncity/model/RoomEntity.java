@@ -2,6 +2,13 @@ package in.fssa.globalfuncity.model;
 
 public abstract class RoomEntity implements Comparable<RoomEntity> {
 
+	private int roomId;
+    private String hotelName;
+    private String roomName;
+    private int noOfBeds;
+    private int price;
+    private boolean isActiveRoom = true;
+	
 	public int getRoomId() {
 		return roomId;
 	}
@@ -45,13 +52,9 @@ public abstract class RoomEntity implements Comparable<RoomEntity> {
 				+ noOfBeds + ", price=" + price + ", isActiveRoom=" + isActiveRoom + "]";
 	}
 	
-	private int roomId;
-    private String hotelName;
-    private String roomName;
-    private int noOfBeds;
-    private int price;
-    private boolean isActiveRoom = true;
-	
-
-
+	@Override
+	public int compareTo(RoomEntity o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

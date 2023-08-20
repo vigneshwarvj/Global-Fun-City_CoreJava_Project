@@ -16,7 +16,12 @@ import in.fssa.globalfuncity.util.ConnectionUtil;
 
 public class UserDAO implements UserInterface<User>{
 	
+	/**
+	 * @return
+	 */
+	
 	//Create User
+	
 	@Override
 	public void create(User newUser) throws PersistenceException {
 		
@@ -51,8 +56,13 @@ public class UserDAO implements UserInterface<User>{
 		        ConnectionUtil.close(conn, ps);
 		    }
 	}
-
+	
+	/**
+	 * @return
+	 */
+	
 	//Update User
+	
 	@Override
 	public void update(int id, User updatedUser) throws PersistenceException {
 		
@@ -122,8 +132,6 @@ public class UserDAO implements UserInterface<User>{
          } finally {
              ConnectionUtil.close(conn, ps);
          }
-         
-		
 	}
 	
 }
