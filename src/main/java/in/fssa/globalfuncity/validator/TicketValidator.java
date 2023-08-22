@@ -6,30 +6,31 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.google.protobuf.ServiceException;
+
 import in.fssa.globalfuncity.dao.TicketDAO;
+import in.fssa.globalfuncity.exception.PersistenceException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.Ticket;
 import in.fssa.globalfuncity.util.StringUtil;
 
 public class TicketValidator {
-    
-    private static final String POSITIVE_INT_PATTERN = "^[1-9]\\d*$";
-    
+	
     /**
      * 
      * @param ticket
      * @throws ValidationException
      */
+    
     public static void validate(Ticket ticket) throws ValidationException {
         if (ticket == null) {
-            throw new ValidationException("Ticket object can not be null");
+            throw new ValidationException("Ticket object cannot be null");
         }
+        
         validateDate(ticket.getFromDate());
         validateDate(ticket.getToDate());
-        validatePositiveInt(ticket.getNoOfAdult(), "No of Adult");
-        validatePositiveInt(ticket.getNoOfChildren(), "No of Children");
-        validatePositiveInt(ticket.getCreatedBy(), "Created By");
-
+        validateNoOfAdult(ticket.getNoOfAdult());
+        validateNoOfChildren(ticket.getNoOfChildren());
     }
     
     /**
@@ -52,10 +53,17 @@ public class TicketValidator {
 	 * @throws ValidationException
 	 */
 	
-	//No Of Adult
-    public static void validatePositiveInt(int value, String fieldName) throws ValidationException {
-        if (!Pattern.matches(POSITIVE_INT_PATTERN, String.valueOf(value))) {
-            throw new ValidationException(fieldName + " should be a positive integer");
+	//No Of Adult Validation
+    public static void validateNoOfAdult(int noOfAdult) throws ValidationException {
+        if (noOfAdult <= 0) {
+            throw new ValidationException("No of Adult should be greater than 0");
+        }
+    }
+    
+    //No Of Children Validation
+    public static void validateNoOfChildren(int noOfChildren) throws ValidationException {
+        if (noOfChildren < 0) {
+            throw new ValidationException("No of Children should be positive integer");
         }
     }
     
@@ -71,6 +79,10 @@ public class TicketValidator {
 	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	    LocalDate dueDate;
 
+	    if (date.trim().isEmpty()) {
+	        throw new ValidationException("Date cannot be empty");
+	    }
+	    
 	    try {
 	        dueDate = LocalDate.parse(date, inputFormatter);
 	    } catch (DateTimeParseException e) {
@@ -98,5 +110,17 @@ public class TicketValidator {
 //		}
 //        return !bookingHistory.isEmpty();
 //    }
+    
+    
+    public boolean hasBookings(int userId) throws ServiceException {
+    	
+            List<Ticket> bookedTickets = TicketDAO.getAllBookedHistoryByUserId(userId);
+            return !bookedTickets.isEmpty();
+
+            TicketDAO ticketDao = new TicketDAO();
+            ticketDao.getAllBookedHistoryByUserId(userId);
+    }
 }
+
+
 

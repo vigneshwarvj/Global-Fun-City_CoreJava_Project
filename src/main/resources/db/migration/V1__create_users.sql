@@ -27,17 +27,16 @@ CREATE TABLE ticketprices (
 -- Ticket
 CREATE TABLE tickets (
 	ticket_id INT AUTO_INCREMENT PRIMARY KEY,
-    from_date DATETIME NOT NULL,
-    to_date DATETIME NOT NULL,
+    from_date DATE NOT NULL,
+    to_date DATE NOT NULL,
     no_of_adult INT NOT NULL,
-    no_of_children INT NOT NULL,
+    no_of_children INT,
     created_by INT NOT NULL,
     adult_price INT NOT NULL,
-    children_price INT NOT NULL,
+    children_price INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (created_by) REFERENCES users (user_id),
-    FOREIGN KEY (adult_price) REFERENCES ticketprices (ticket_price_id),
-    FOREIGN KEY (children_price) REFERENCES ticketprices (ticket_price_id)
+    total_price INT NOT NULL
 );
 
 -- rooms
@@ -46,5 +45,6 @@ CREATE TABLE rooms (
     hotel_name VARCHAR(255) NOT NULL,
     room_name VARCHAR(255) NOT NULL,
     no_of_beds INT NOT NULL,
-    price INT NOT NULL
+    price INT NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE
 );

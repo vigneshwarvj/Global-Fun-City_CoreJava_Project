@@ -8,13 +8,20 @@ import java.sql.SQLException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.util.ConnectionUtil;
 
+/**
+ * The UserExists class provides methods to check the existence of user data in the database.
+ * It helps in validating whether a given email or user ID already exists or not.
+ */
+
 public class UserExists {
 
-	/**
-	 * 
-	 * @param email
-	 * @throws ValidationException
-	 */
+    /**
+     * Checks whether a user with the given email already exists in the database.
+     *
+     * @param email The email to check for existence.
+     * @throws ValidationException If the email already exists in the database.
+     */
+	
 	public static void emailExists(String email) throws ValidationException {
 		
 		Connection conn = null;
@@ -23,7 +30,7 @@ public class UserExists {
 
 		try {
 			
-			String query = "Select * From users Where email = ?";
+			String query = "SELECT * FROM users WHERE email = ?";
 			conn = ConnectionUtil.getConnection();
 			pre = conn.prepareStatement(query);
 			pre.setString(1, email);
@@ -45,11 +52,13 @@ public class UserExists {
 		
 	}
    
-	/**
-	 * 
-	 * @param id
-	 * @throws ValidationException
-	 */
+    /**
+     * Checks whether a user with the given ID exists in the database.
+     *
+     * @param id The ID to check for existence.
+     * @throws ValidationException If the user with the given ID doesn't exist in the database.
+     */
+	
 	public static void checkIdExists(int id) throws ValidationException {
 		
 		Connection conn = null;
@@ -58,7 +67,7 @@ public class UserExists {
 
 		try {
 			
-			String query = "Select * From users Where is_active = 1 AND user_id = ?";
+			String query = "SELECT * FROM users WHERE is_active = 1 AND user_id = ?";
 			conn = ConnectionUtil.getConnection();
 			pre = conn.prepareStatement(query);
 			pre.setInt(1, id);
@@ -80,11 +89,14 @@ public class UserExists {
 		
 	}
 	
-	/**
-	 * 
-	 * @param email
-	 * @throws ValidationException
-	 */
+    /**
+     * Checks whether a user with the given email exists in the database.
+     * This method also considers the 'is_active' status of the user.
+     *
+     * @param email The email to check for existence.
+     * @throws ValidationException If the email doesn't exist in the database or is not active.
+     */
+	
 	public static void checkEmailExists(String email) throws ValidationException {
 		
 		Connection conn = null;
@@ -93,7 +105,7 @@ public class UserExists {
 
 		try {
 			
-			String query = "Select * From users Where is_active = 1 AND email = ?";
+			String query = "SELECT * FROM users WHERE is_active = 1 AND email = ?";
 			conn = ConnectionUtil.getConnection();
 			pre = conn.prepareStatement(query);
 			pre.setString(1, email);

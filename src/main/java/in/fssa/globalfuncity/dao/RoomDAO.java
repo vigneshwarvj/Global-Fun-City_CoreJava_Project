@@ -49,7 +49,7 @@ public class RoomDAO {
 		
            e.printStackTrace();
            System.out.println(e.getMessage());
-           throw new PersistenceException(e);
+           throw new PersistenceException(e.getMessage());
         
     }  finally {
     	
@@ -113,7 +113,7 @@ public class RoomDAO {
 	        	
 	        e.printStackTrace();
 	        System.out.println(e.getMessage());
-	        throw new PersistenceException(e);
+	        throw new PersistenceException(e.getMessage());
 	            
 	        } catch (RuntimeException er) {
 	        	
@@ -166,8 +166,7 @@ public class RoomDAO {
         } catch (SQLException e) {
         	
             e.printStackTrace();
-            System.out.println(e.getMessage());
-            throw new PersistenceException(e);
+            throw new PersistenceException(e.getMessage());
             
         } catch (RuntimeException er) {
         	
@@ -226,7 +225,7 @@ public class RoomDAO {
         	
             e.printStackTrace();
             System.out.println(e.getMessage());
-            throw new PersistenceException(e);
+            throw new PersistenceException(e.getMessage());
             
         } catch (RuntimeException er) {
         	

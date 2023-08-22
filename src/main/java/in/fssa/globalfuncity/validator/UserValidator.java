@@ -5,6 +5,9 @@ import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.User;
 import in.fssa.globalfuncity.util.StringUtil;
 
+/**
+ * UserValidator class provides methods to validate various attributes of a User object.
+ */
 
 public class UserValidator {
 	
@@ -13,11 +16,12 @@ public class UserValidator {
 	private static final String EMAIL_PATTERN = "^[a-zA-Z0-9]+([a-zA-Z0-9_+\\-\\. ]*[a-zA-Z0-9]+)?@[a-zA-Z0-9]+([a-zA-Z0-9\\-\\.]*[a-zA-Z0-9])?\\.[a-zA-Z]{2,}$";
 	private static final String PASSWORD_PATTERN = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
 	
-	/**
-	 * 
-	 * @param user
-	 * @throws ValidationException
-	 */
+    /**
+     * Validates a User object's attributes.
+     *
+     * @param user The User object to be validated.
+     * @throws ValidationException If any validation rule is violated.
+     */
 	
 	//Checking whether user object null or not.
 	public static void Validate(User user) throws ValidationException {
@@ -32,11 +36,12 @@ public class UserValidator {
 		validatePhoneNumber(user.getPhoneNumber());
 	}
 	
-	/**
-	 * 
-	 * @param userId
-	 * @throws ValidationException
-	 */
+    /**
+     * Validates the ID of a User.
+     *
+     * @param userId The ID of the User.
+     * @throws ValidationException If the ID is less than or equal to zero.
+     */
 	
 	//UserID Validation
 	public static void validateId(int userId) throws ValidationException{
@@ -45,11 +50,12 @@ public class UserValidator {
 		}
 	}
 
-	/**
-	 * 
-	 * @param firstName
-	 * @throws ValidationException
-	 */
+    /**
+     * Validates the first name of a User.
+     *
+     * @param firstName The first name of the User.
+     * @throws ValidationException If the first name doesn't match the pattern.
+     */
 	
 	//FirstName Validation
 	public static void validateFirstName(String firstName) throws ValidationException {
@@ -59,11 +65,12 @@ public class UserValidator {
 		}
 	}
 
-	/**
-	 * 
-	 * @param middleName
-	 * @throws ValidationException
-	 */
+    /**
+     * Validates the middle name of a User.
+     *
+     * @param middleName The middle name of the User.
+     * @throws ValidationException If the middle name doesn't match the pattern.
+     */
 	
 	//MiddleName Validation
 	public static void validateMiddleName(String middleName) throws ValidationException {
@@ -74,11 +81,12 @@ public class UserValidator {
 		
 	}
 
-	/**
-	 * 
-	 * @param lastName
-	 * @throws ValidationException
-	 */
+    /**
+     * Validates the last name of a User.
+     *
+     * @param lastName The last name of the User.
+     * @throws ValidationException If the last name doesn't match the pattern.
+     */
 	
 	//LastName Validation
 	public static void validateLastName(String lastName) throws ValidationException {
@@ -89,11 +97,12 @@ public class UserValidator {
 		
 	}
 	
-	/**
-	 * 
-	 * @param email
-	 * @throws ValidationException
-	 */
+    /**
+     * Validates the email of a User.
+     *
+     * @param email The email of the User.
+     * @throws ValidationException If the email doesn't match the pattern.
+     */
 	
 	//Email Validation
 	public static void validateEmail(String email) throws ValidationException {
@@ -103,40 +112,42 @@ public class UserValidator {
 		}
 	}
 
-	/**
-	 * 
-	 * @param password
-	 * @throws ValidationException
-	 */
+    /**
+     * Validates the password of a User.
+     *
+     * @param password The password of the User.
+     * @throws ValidationException If the password doesn't match the pattern.
+     */
 	
 	//Password Validation
 	public static void validatePassword(String password) throws ValidationException {
 		StringUtil.rejectIfInvalidString(password, "Password");
 		 if (password.length() != 8) {
-		        throw new ValidationException("Password doesn't match the length");
+		        throw new ValidationException("Please give one uppercase, one lowercase, one special character and one number. Length of the password should be 8.");
 		    }
 
 		if (!Pattern.matches(PASSWORD_PATTERN, password)) {
-			throw new ValidationException("Password doesn't match the pattern");
+			throw new ValidationException("Please give one uppercase, one lowercase, one special character and one number. Length of the password should be 8.");
 		}
 	}
 
-	/**
-	 * 
-	 * @param phoneNumber
-	 * @throws ValidationException
-	 */
+    /**
+     * Validates the phone number of a User.
+     *
+     * @param phoneNumber The phone number of the User.
+     * @throws ValidationException If the phone number doesn't match the pattern.
+     */
 	
 	//PhoneNumber Validation
 	public static void validatePhoneNumber(long phoneNumber) throws ValidationException {
 	    String phoneNumberStr = String.valueOf(phoneNumber);
 
 	    if (phoneNumberStr.length() != 10) {
-	        throw new ValidationException("PhoneNumber doesn't match the length");
+	        throw new ValidationException("PhoneNumber should be in 10 Integers without country code.");
 	    }
 
 	    if (phoneNumber < 6000000000L || phoneNumber >= 10000000000L) {
-	        throw new ValidationException("PhoneNumber doesn't match the pattern");
+	        throw new ValidationException("PhoneNumber should be in 10 Integers without country code.");
 	    }
 	}
 	

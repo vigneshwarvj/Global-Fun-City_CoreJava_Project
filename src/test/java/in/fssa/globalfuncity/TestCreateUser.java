@@ -20,7 +20,7 @@ public class TestCreateUser {
         newUser.setFirstName("Sam");
         newUser.setMiddleName("Ganesh");
         newUser.setLastName("S");
-        newUser.setEmail("samganesh@gmail.com");
+        newUser.setEmail("vv@gmail.com");
         newUser.setPassword("Sam@2300");
         newUser.setPhoneNumber(9923456787L);
 
@@ -89,7 +89,7 @@ public class TestCreateUser {
 	public void testCreateUserWithFirstNamePattern() {
 		UserService userService = new UserService();
 		User newUser = new User();
-        newUser.setFirstName("sam24");
+        newUser.setFirstName("Sam24");
         newUser.setMiddleName("ganesh");
         newUser.setLastName("S");
 		newUser.setEmail("sam@gmail.com");
@@ -357,7 +357,7 @@ public class TestCreateUser {
 		Exception exception = assertThrows(Exception.class, () -> {
 			userService.create(newUser);
 		});
-		String expectedMessage = "Password doesn't match the length";
+		String expectedMessage = "Please give one uppercase, one lowercase, one special character and one number. Length of the password should be 8.";
 		String actualMessage = exception.getMessage();
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
@@ -377,7 +377,7 @@ public class TestCreateUser {
 		Exception exception = assertThrows(Exception.class, () -> {
 			userService.create(newUser);
 		});
-		String expectedMessage = "Password doesn't match the length";
+		String expectedMessage = "Please give one uppercase, one lowercase, one special character and one number. Length of the password should be 8.";
 		String actualMessage = exception.getMessage();
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
@@ -399,7 +399,7 @@ public class TestCreateUser {
 		       userService.create(newUser);
 		});
 	
-		String expectedMessage = "PhoneNumber doesn't match the length";
+		String expectedMessage = "PhoneNumber should be in 10 Integers without country code.";
 		String actualMessage = exception.getMessage();
 	
 		  assertTrue(expectedMessage.equals(actualMessage));
@@ -421,7 +421,7 @@ public class TestCreateUser {
             userService.create(newUser);
         });
 
-        String expectedMessage = "PhoneNumber doesn't match the pattern";
+        String expectedMessage = "PhoneNumber should be in 10 Integers without country code.";
         String actualMessage = exception.getMessage();
 
         assertTrue(expectedMessage.equals(actualMessage));

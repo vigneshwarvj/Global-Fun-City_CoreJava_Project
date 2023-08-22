@@ -49,7 +49,7 @@ public class UserDAO implements UserInterface<User>{
 		    	
 		        e.printStackTrace();
 		        System.out.println(e.getMessage());
-		        throw new PersistenceException(e);
+		        throw new PersistenceException(e.getMessage());
 		        
 		    } finally {
 		    	
@@ -92,11 +92,6 @@ public class UserDAO implements UserInterface<User>{
              if (updatedUser.getPassword() != null) {
                  queryBuilder.append("password = ?, ");
                  values.add(updatedUser.getPassword());
-             }
-             
-             if (updatedUser.getEmail() != null) {
-                 queryBuilder.append("email = ?, ");
-                 values.add(updatedUser.getEmail());
              }
              
  	        if (updatedUser.getPhoneNumber() != 0) {

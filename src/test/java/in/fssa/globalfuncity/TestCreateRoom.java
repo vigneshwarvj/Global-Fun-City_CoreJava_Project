@@ -17,8 +17,8 @@ public class TestCreateRoom {
     public void testCreateRoomWithValidInput() {
         RoomService roomService = new RoomService();
         Room room = new Room();
-        room.setHotelName("King");
-        room.setRoomName("OMR");
+        room.setHotelName("Freshworks");
+        room.setRoomName("Kelvi");
         room.setNoOfBeds(4);
         room.setPrice(60);
         assertDoesNotThrow(() -> {

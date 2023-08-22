@@ -22,7 +22,7 @@ public class RoomExists {
 
 		try {
 			
-			String query = "Select * From rooms Where is_active = 1 AND room_id = ?";
+			String query = "SELECT * FROM rooms WHERE is_active = 1 AND room_id = ?";
 			conn = ConnectionUtil.getConnection();
 			pre = conn.prepareStatement(query);
 			pre.setInt(1, id);

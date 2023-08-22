@@ -18,7 +18,6 @@ public class TestGetAllUser {
 		newUser.setFirstName("Vignesh");
 		newUser.setMiddleName("VV");
 		newUser.setLastName("Vijay");
-		newUser.setEmail("vv@gmail.com");
 		newUser.setPassword("Vignes!1");
 		newUser.setPhoneNumber(9965283126L);
 		userService.update(1, newUser);
