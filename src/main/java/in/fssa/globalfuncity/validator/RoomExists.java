@@ -44,4 +44,34 @@ public class RoomExists {
 		
 	}
 	
+	public static void roomNameExists(String roomName) throws ValidationException {
+		
+		Connection conn = null;
+		PreparedStatement pre = null;
+		ResultSet rs = null;
+
+		try {
+			
+			String query = "SELECT * FROM rooms WHERE room_name = ?";
+			conn = ConnectionUtil.getConnection();
+			pre = conn.prepareStatement(query);
+			pre.setString(1, roomName);
+			rs = pre.executeQuery();
+			
+			if (rs.next()) {
+				throw new ValidationException("Room Name already exists");
+			} 
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+			
+		} finally {
+			ConnectionUtil.close(conn, pre, rs);
+		}
+		
+	}
+	
 }

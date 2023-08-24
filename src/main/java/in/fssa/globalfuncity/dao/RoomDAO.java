@@ -147,7 +147,7 @@ public class RoomDAO {
 
         try {
         	
-            String query = "SELECT * FROM rooms";
+            String query = "SELECT room_id, hotel_name, room_name, no_of_beds, price FROM rooms";
             
             conn = ConnectionUtil.getConnection();
             ps = conn.prepareStatement(query);
@@ -202,7 +202,7 @@ public class RoomDAO {
 
         try {
         	
-            String query = "SELECT * FROM rooms WHERE no_of_beds = ?";
+            String query = "SELECT room_id, hotel_name, room_name, no_of_beds, price FROM rooms WHERE no_of_beds = ?";
             
             conn = ConnectionUtil.getConnection();
             ps = conn.prepareStatement(query);

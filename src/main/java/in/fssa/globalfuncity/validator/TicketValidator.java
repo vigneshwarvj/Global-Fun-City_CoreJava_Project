@@ -20,9 +20,10 @@ public class TicketValidator {
      * 
      * @param ticket
      * @throws ValidationException
+     * @throws PersistenceException 
      */
     
-    public static void validate(Ticket ticket) throws ValidationException {
+    public static void validate(Ticket ticket) throws ValidationException, PersistenceException {
         if (ticket == null) {
             throw new ValidationException("Ticket object cannot be null");
         }
@@ -74,7 +75,7 @@ public class TicketValidator {
      */
     
     //Date Validation
-    public static void validateDate(String date) throws ValidationException {
+    public static void validateDate(String date) throws ValidationException, PersistenceException {
 	    StringUtil.rejectIfInvalidString(date, "Date");
 	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	    LocalDate dueDate;
@@ -96,29 +97,6 @@ public class TicketValidator {
 	    if (dueDate.isBefore(currentDate) || dueDate.equals(currentDate) || dueDate.isAfter(currentDate.plusDays(90))) {
 	        throw new ValidationException("Invalid date or Invalid date format (yyyy-MM-dd)");
 	    }
-    }
-    
-    
-    //Booking History Validation
-//    public boolean hasBookedTicket(int userId) {
-//        List<Ticket> bookingHistory = null;
-//		try {
-//			bookingHistory = TicketDAO.getBookingHistoryByUserId(userId);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        return !bookingHistory.isEmpty();
-//    }
-    
-    
-    public boolean hasBookings(int userId) throws ServiceException {
-    	
-            List<Ticket> bookedTickets = TicketDAO.getAllBookedHistoryByUserId(userId);
-            return !bookedTickets.isEmpty();
-
-            TicketDAO ticketDao = new TicketDAO();
-            ticketDao.getAllBookedHistoryByUserId(userId);
     }
 }
 

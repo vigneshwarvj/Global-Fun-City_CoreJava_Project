@@ -153,6 +153,26 @@ public class TestCreateRoom {
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
+	//RoomName Already Exists
+	@Test
+	public void testCreateRoomWithRoomNameExists() {
+		RoomService roomService = new RoomService();
+		Room room = new Room();
+		room.setHotelName("Freshworks");
+		room.setRoomName("Kelvi");
+		room.setNoOfBeds(2);
+		room.setPrice(40);
+		
+		Exception exception = assertThrows(Exception.class, () -> {
+			roomService.create(room);
+		});
+		String expectedMessage = "Room Name already exists";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(expectedMessage.equals(actualMessage));
+		
+	}
+	
 	//No of beds is 0
 	@Test
 	public void testCreateRoomWithZeroBed() {

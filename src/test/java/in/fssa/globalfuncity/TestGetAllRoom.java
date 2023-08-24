@@ -15,6 +15,9 @@ public class TestGetAllRoom {
 	//Update Room
 	@Test
 	public void testUpdateRoom() throws ValidationException, PersistenceException {
+		
+		
+		
 		RoomService roomService = new RoomService();
 		Room room = new Room();
 		room.setHotelName("Freshworks");

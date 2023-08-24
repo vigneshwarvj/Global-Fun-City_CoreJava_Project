@@ -6,21 +6,39 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+import java.util.random.*;
+
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.User;
 import in.fssa.globalfuncity.service.UserService;
 
 public class TestCreateUser {
 	
+	//Random Generator
+	private String generateRandomString(int length) {
+	    String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	    StringBuilder randomString = new StringBuilder();
+	    Random random = new Random();
+
+	    for (int i = 0; i < length; i++) {
+	        int index = random.nextInt(characters.length());
+	        randomString.append(characters.charAt(index));
+	    }
+
+	    return randomString.toString();
+	}
+	
 	//With Valid all input
 	@Test
     public void testCreateUserWithValidInput() {
         UserService userService = new UserService();
         User newUser = new User();
+        String randomString = generateRandomString(8); 
         newUser.setFirstName("Sam");
         newUser.setMiddleName("Ganesh");
         newUser.setLastName("S");
-        newUser.setEmail("vv@gmail.com");
+        newUser.setEmail(randomString + "@" + "gmail.com");
         newUser.setPassword("Sam@2300");
         newUser.setPhoneNumber(9923456787L);
 
@@ -285,7 +303,7 @@ public class TestCreateUser {
 	        newUser.setFirstName("Sam");
 	        newUser.setMiddleName("ganesh");
 	        newUser.setLastName("S");
-			newUser.setEmail("vv@gmail.com");
+			newUser.setEmail("sam@gmail.com");
 			newUser.setPassword("Sam@2303");
 			newUser.setPhoneNumber(9923456787L);
 

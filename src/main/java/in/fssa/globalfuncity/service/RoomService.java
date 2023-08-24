@@ -23,6 +23,7 @@ public class RoomService {
 	// Create Room
     public void create(Room room) throws ValidationException, PersistenceException {
             RoomValidator.validate(room);
+            RoomExists.roomNameExists(room.getRoomName());
             RoomDAO roomDao = new RoomDAO();
             roomDao.create(room);
     }

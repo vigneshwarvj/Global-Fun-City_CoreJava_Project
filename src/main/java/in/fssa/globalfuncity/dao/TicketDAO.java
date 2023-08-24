@@ -87,8 +87,10 @@ public class TicketDAO {
 	 * @param userId
 	 * @return
 	 */
+	 
 	// GetAllBookingHistoryByUserId
 	    public static List<Ticket> getAllBookedHistoryByUserId(int userId) throws PersistenceException {
+	    	
 	        List<Ticket> tickets = new ArrayList<>();
 	        Connection conn = null;
 	        PreparedStatement ps = null;
@@ -96,7 +98,7 @@ public class TicketDAO {
 
 	        try {
 	            conn = ConnectionUtil.getConnection();
-	            String query = "SELECT * FROM tickets WHERE created_by = ?";
+	            String query = "SELECT ticket_id, from_date, to_date, no_of_adult, no_of_children, created_by, adult_price, children_price, total_price FROM tickets WHERE created_by = ?";
 	            ps = conn.prepareStatement(query);
 	            ps.setInt(1, userId);
 	            rs = ps.executeQuery();
@@ -116,7 +118,9 @@ public class TicketDAO {
 	                tickets.add(ticket);
 	            }
 	        } catch (SQLException e) {
+	        	
 	            throw new PersistenceException("Error retrieving booked tickets");
+	            
 	        } finally {
 	            ConnectionUtil.close(conn, ps, rs);
 	        }
