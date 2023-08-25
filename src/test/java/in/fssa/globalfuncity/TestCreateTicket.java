@@ -19,8 +19,8 @@ public class TestCreateTicket {
 	public void testCreateTicketWithValidInput() {
 		TicketService ticketService = new TicketService();
 		Ticket ticket = new Ticket();
-		ticket.setFromDate("2023-08-24");
-		ticket.setToDate("2023-08-25");
+		ticket.setFromDate("2023-10-24");
+		ticket.setToDate("2023-10-25");
 		ticket.setNoOfAdult(1);
 		ticket.setNoOfChildren(1);
 		ticket.setCreatedBy(1);
@@ -131,7 +131,7 @@ public class TestCreateTicket {
 	public void testCreateTicketWithToDateNull() {
 	    TicketService ticketService = new TicketService();
 	    Ticket ticket = new Ticket();
-	    ticket.setFromDate("2023-08-25");
+	    ticket.setFromDate("2023-09-25");
 	    ticket.setToDate(null);
 	    ticket.setNoOfAdult(1);
 	    ticket.setNoOfChildren(1);
@@ -152,7 +152,7 @@ public class TestCreateTicket {
 	public void testCreateTicketWithToDateEmpty() {
 	    TicketService ticketService = new TicketService();
 	    Ticket ticket = new Ticket();
-	    ticket.setFromDate("2023-08-25");
+	    ticket.setFromDate("2023-09-25");
 	    ticket.setToDate("");
 	    ticket.setNoOfAdult(1);
 	    ticket.setNoOfChildren(1);
@@ -215,8 +215,8 @@ public class TestCreateTicket {
 	public void testCreateTicketWithNoOfAdultAsZero() {
 	    TicketService ticketService = new TicketService();
 	    Ticket ticket = new Ticket();
-	    ticket.setFromDate("2023-08-24");
-	    ticket.setToDate("2023-08-25");
+	    ticket.setFromDate("2023-10-24");
+	    ticket.setToDate("2023-10-25");
 	    ticket.setNoOfAdult(0);
 	    ticket.setNoOfChildren(1);
 	    ticket.setCreatedBy(1);
@@ -227,8 +227,8 @@ public class TestCreateTicket {
 	    
 	    String expectedMessage = "No of Adult should be greater than 0";
 	    String actualMessage = exception.getMessage();
+	    assertEquals(expectedMessage,actualMessage);
 
-	    assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
 	//With No of Adults as Negative
@@ -236,8 +236,8 @@ public class TestCreateTicket {
 	public void testCreateTicketWithNoOfAdultAsNegativeInteger() {
 	    TicketService ticketService = new TicketService();
 	    Ticket ticket = new Ticket();
-	    ticket.setFromDate("2023-08-24");
-	    ticket.setToDate("2023-08-25");
+	    ticket.setFromDate("2023-10-24");
+	    ticket.setToDate("2023-10-25");
 	    ticket.setNoOfAdult(-1);
 	    ticket.setNoOfChildren(1);
 	    ticket.setCreatedBy(1);
@@ -257,8 +257,8 @@ public class TestCreateTicket {
 	public void testCreateTicketWithNoOfChildernAsNegativeInteger() {
 	    TicketService ticketService = new TicketService();
 	    Ticket ticket = new Ticket();
-	    ticket.setFromDate("2023-08-23");
-	    ticket.setToDate("2023-08-24");
+	    ticket.setFromDate("2023-10-23");
+	    ticket.setToDate("2023-10-24");
 	    ticket.setNoOfAdult(1);
 	    ticket.setNoOfChildren(-1);
 	    ticket.setCreatedBy(1);

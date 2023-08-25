@@ -31,7 +31,7 @@ public class TestGetAllRoom {
     @Test
 	public void getAllRooms() throws PersistenceException {
 		RoomService roomService = new RoomService();
-		Set<Room> arr = roomService.getAll();
+		Set<Room> arr = roomService.getAllRooms();
 		System.out.println(arr);
 	}
     

@@ -76,14 +76,10 @@ public class TicketValidator {
     
     //Date Validation
     public static void validateDate(String date) throws ValidationException, PersistenceException {
-	    StringUtil.rejectIfInvalidString(date, "Date");
+       StringUtil.rejectIfInvalidString(date, "Date");
+	  
 	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	    LocalDate dueDate;
-
-	    if (date.trim().isEmpty()) {
-	        throw new ValidationException("Date cannot be empty");
-	    }
-	    
 	    try {
 	        dueDate = LocalDate.parse(date, inputFormatter);
 	    } catch (DateTimeParseException e) {
@@ -91,7 +87,6 @@ public class TicketValidator {
 	    }
 
 	    String formattedDate = dueDate.format(inputFormatter);
-	    System.out.println("Formatted Date: " + formattedDate);
 	    LocalDate currentDate = LocalDate.now();
 
 	    if (dueDate.isBefore(currentDate) || dueDate.equals(currentDate) || dueDate.isAfter(currentDate.plusDays(90))) {
@@ -99,6 +94,3 @@ public class TicketValidator {
 	    }
     }
 }
-
-
-

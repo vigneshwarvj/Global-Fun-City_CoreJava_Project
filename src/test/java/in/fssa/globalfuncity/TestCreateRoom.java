@@ -1,8 +1,11 @@
 package in.fssa.globalfuncity;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +21,13 @@ public class TestCreateRoom {
         RoomService roomService = new RoomService();
         Room room = new Room();
         room.setHotelName("Freshworks");
-        room.setRoomName("Kelvi");
+        String roomName = generateRandomString(4);
+        room.setRoomName(roomName);
+        
         room.setNoOfBeds(4);
         room.setPrice(60);
         assertDoesNotThrow(() -> {
-            roomService.create(room);
+            roomService.createRoom(room);
         });
     }
 	
@@ -31,7 +36,7 @@ public class TestCreateRoom {
 	public void testCreateRoomWithInvalidInput() {
 		RoomService roomService = new RoomService();
 		Exception exception = assertThrows(ValidationException.class, () -> {
-			roomService.create(null);
+			roomService.createRoom(null);
 		});
 		String expectedMessage = "Room object can not be null";
 		String actualMessage = exception.getMessage();
@@ -50,7 +55,7 @@ public class TestCreateRoom {
 		room.setPrice(40);
 
 		Exception exception = assertThrows(Exception.class, () -> {
-			roomService.create(room);
+			roomService.createRoom(room);
 		});
 		String expectedMessage = "Hotel Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
@@ -69,7 +74,7 @@ public class TestCreateRoom {
 		room.setPrice(40);
 
 		Exception exception = assertThrows(Exception.class, () -> {
-			roomService.create(room);
+			roomService.createRoom(room);
 		});
 		String expectedMessage = "Hotel Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
@@ -88,7 +93,7 @@ public class TestCreateRoom {
 		room.setPrice(40);
 
 		Exception exception = assertThrows(Exception.class, () -> {
-			roomService.create(room);
+			roomService.createRoom(room);
 		});
 		String expectedMessage = "Hotel Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
@@ -107,7 +112,7 @@ public class TestCreateRoom {
 		room.setPrice(40);
 
 		Exception exception = assertThrows(Exception.class, () -> {
-			roomService.create(room);
+			roomService.createRoom(room);
 		});
 		String expectedMessage = "Room Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
@@ -126,7 +131,7 @@ public class TestCreateRoom {
 		room.setPrice(40);
 
 		Exception exception = assertThrows(Exception.class, () -> {
-			roomService.create(room);
+			roomService.createRoom(room);
 		});
 		String expectedMessage = "Room Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
@@ -139,19 +144,21 @@ public class TestCreateRoom {
 	public void testCreateRoomWithRoomNamePattern() {
 		RoomService roomService = new RoomService();
 		Room room = new Room();
+		String generateRoomName = generateRandomString(4);
 		room.setHotelName("King");
-		room.setRoomName("ECR");
+		room.setRoomName(generateRoomName+"123");
 		room.setNoOfBeds(2);
 		room.setPrice(40);
 
 		Exception exception = assertThrows(Exception.class, () -> {
-			roomService.create(room);
+			roomService.createRoom(room);
 		});
 		String expectedMessage = "Room Name doesn't match the pattern";
 		String actualMessage = exception.getMessage();
+		 assertEquals(expectedMessage,actualMessage);
 
-		assertTrue(expectedMessage.equals(actualMessage));
 	}
+
 	
 	//RoomName Already Exists
 	@Test
@@ -164,7 +171,7 @@ public class TestCreateRoom {
 		room.setPrice(40);
 		
 		Exception exception = assertThrows(Exception.class, () -> {
-			roomService.create(room);
+			roomService.createRoom(room);
 		});
 		String expectedMessage = "Room Name already exists";
 		String actualMessage = exception.getMessage();
@@ -184,7 +191,7 @@ public class TestCreateRoom {
 		room.setPrice(10);
 		
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-		       roomService.create(room);
+		       roomService.createRoom(room);
 		});
 	
 		String expectedMessage = "Number of beds should be greater than zero";
@@ -205,7 +212,7 @@ public class TestCreateRoom {
 		room.setPrice(0);
 		
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-		       roomService.create(room);
+		       roomService.createRoom(room);
 		});
 	
 		String expectedMessage = "Price should be a positive integer and should be greater than zero";
@@ -213,6 +220,17 @@ public class TestCreateRoom {
 	
 		  assertTrue(expectedMessage.equals(actualMessage));
 	
+	}
+	
+	private String generateRandomString(int length) {
+	    String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	    StringBuilder randomString = new StringBuilder();
+	    Random random = new Random();
+	    for (int i = 0; i < length; i++) {
+	        int index = random.nextInt(characters.length());
+	        randomString.append(characters.charAt(index));
+	    }
+	    return randomString.toString();
 	}
 
 }

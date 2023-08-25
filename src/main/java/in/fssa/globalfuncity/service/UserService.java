@@ -18,7 +18,7 @@ public class UserService {
 	 */
 	
 	//Create User
-	public void create(User newUser) throws ValidationException, PersistenceException{
+	public void createUser(User newUser) throws ValidationException, PersistenceException{
 		UserValidator.Validate(newUser);
 		UserExists.emailExists(newUser.getEmail());
 		UserDAO userDAO = new UserDAO();
@@ -36,7 +36,7 @@ public class UserService {
 	
 	//Update User
 	
-	public void update(int id, User updatedUser) throws ValidationException, PersistenceException {
+	public void updateUser(int id, User updatedUser) throws ValidationException, PersistenceException {
 		UserValidator.validateId(id);
 		UserExists.checkIdExists(id);
 		

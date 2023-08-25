@@ -30,7 +30,7 @@ public class UserExists {
 
 		try {
 			
-			String query = "SELECT * FROM users WHERE email = ?";
+			String query = "SELECT email FROM users WHERE email = ?";
 			conn = ConnectionUtil.getConnection();
 			pre = conn.prepareStatement(query);
 			pre.setString(1, email);
@@ -67,7 +67,7 @@ public class UserExists {
 
 		try {
 			
-			String query = "SELECT * FROM users WHERE is_active = 1 AND user_id = ?";
+			String query = "SELECT user_id FROM users WHERE is_active = 1 AND user_id = ?";
 			conn = ConnectionUtil.getConnection();
 			pre = conn.prepareStatement(query);
 			pre.setInt(1, id);
@@ -105,7 +105,7 @@ public class UserExists {
 
 		try {
 			
-			String query = "SELECT * FROM users WHERE is_active = 1 AND email = ?";
+			String query = "SELECT email FROM users WHERE is_active = 1 AND email = ?";
 			conn = ConnectionUtil.getConnection();
 			pre = conn.prepareStatement(query);
 			pre.setString(1, email);

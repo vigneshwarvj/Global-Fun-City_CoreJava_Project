@@ -20,6 +20,6 @@ public class TestGetAllUser {
 		newUser.setLastName("Vijay");
 		newUser.setPassword("Vignes!1");
 		newUser.setPhoneNumber(9965283126L);
-		userService.update(1, newUser);
+		userService.updateUser(1, newUser);
 	}
 }

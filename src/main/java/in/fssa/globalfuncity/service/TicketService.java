@@ -26,14 +26,14 @@ public class TicketService {
 	public void bookTicket(Ticket ticket)throws ValidationException, PersistenceException, SQLException {
 
 		TicketValidator.validate(ticket);
-		TicketDAO ticketDao = new TicketDAO();
-		int aprice = ticketDao.getPrice("adult");
-		int cprice = ticketDao.getPrice("children");
+		TicketDAO ticketDAO = new TicketDAO();
+		int aprice = ticketDAO.getPrice("adult");
+		int cprice = ticketDAO.getPrice("children");
 		
 		ticket.setAdultPrice(aprice);
 		ticket.setChildrenPrice(cprice);
 		
-		ticketDao.bookNewTicket(ticket);
+		ticketDAO.bookNewTicket(ticket);
 		
 		//System.out.println(aprice);
 		//System.out.print(cprice);
@@ -49,8 +49,8 @@ public class TicketService {
  */
     public List<Ticket> getAllBookedTicketsByUserId(int userId) throws ServiceException, PersistenceException {
         try {
-           TicketDAO ticketDao = new TicketDAO();
-           return ticketDao.getAllBookedHistoryByUserId(userId);
+           TicketDAO ticketDAO = new TicketDAO();
+           return ticketDAO.getAllBookedHistoryByUserId(userId);
         } catch (PersistenceException e) {
         	throw new ServiceException("Error occurred while retrieving tickets.", e);
         }

@@ -21,11 +21,11 @@ public class RoomService {
      */
 	
 	// Create Room
-    public void create(Room room) throws ValidationException, PersistenceException {
+    public void createRoom(Room room) throws ValidationException, PersistenceException {
             RoomValidator.validate(room);
             RoomExists.roomNameExists(room.getRoomName());
-            RoomDAO roomDao = new RoomDAO();
-            roomDao.create(room);
+            RoomDAO roomDAO = new RoomDAO();
+            roomDAO.create(room);
     }
     
     /**
@@ -54,8 +54,8 @@ public class RoomService {
     		RoomValidator.validatePrice(updateRoom.getPrice());
     	}
     	
-    	RoomDAO roomDao =  new RoomDAO();
-    	roomDao.update(roomId, updateRoom);
+    	RoomDAO roomDAO =  new RoomDAO();
+    	roomDAO.update(roomId, updateRoom);
     }
     
     /**
@@ -65,11 +65,11 @@ public class RoomService {
      */
     
     //List All Rooms
-	public Set<Room> getAll() throws PersistenceException {
+	public Set<Room> getAllRooms() throws PersistenceException {
 		
-		RoomDAO roomDao = new RoomDAO();
+		RoomDAO roomDAO = new RoomDAO();
 		
-		Set<Room> roomList = roomDao.listAllRooms();
+		Set<Room> roomList = roomDAO.listAllRooms();
 		
 		for(Room room : roomList) {
 			System.out.println(room);
@@ -87,9 +87,9 @@ public class RoomService {
 	//List All Rooms By No Of Beds
 	public Set<Room> getAllRoomsByNoOfBeds(int numberOfBeds) throws PersistenceException {
 		
-		RoomDAO roomDao = new RoomDAO();
+		RoomDAO roomDAO = new RoomDAO();
 		
-		Set<Room> roomList = roomDao.listAllRoomsByNoOfBeds(4);
+		Set<Room> roomList = roomDAO.listAllRoomsByNoOfBeds(4);
 		
 		for(Room room : roomList) {
 			System.out.println(room);

@@ -1,7 +1,6 @@
 package in.fssa.globalfuncity.validator;
 
 import java.util.regex.Pattern;
-
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.Room;
 import in.fssa.globalfuncity.util.StringUtil;
