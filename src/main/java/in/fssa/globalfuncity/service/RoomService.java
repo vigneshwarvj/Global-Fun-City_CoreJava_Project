@@ -5,6 +5,7 @@ import java.util.Set;
 
 import in.fssa.globalfuncity.dao.RoomDAO;
 import in.fssa.globalfuncity.exception.PersistenceException;
+import in.fssa.globalfuncity.exception.ServiceException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.Room;
 import in.fssa.globalfuncity.validator.RoomExists;
@@ -65,7 +66,7 @@ public class RoomService {
      */
     
     //List All Rooms
-	public Set<Room> getAllRooms() throws PersistenceException {
+	public static Set<Room> getAllRooms() throws PersistenceException {
 		
 		RoomDAO roomDAO = new RoomDAO();
 		
@@ -96,4 +97,27 @@ public class RoomService {
 		}
 		return roomList;
 	}
+	
+	//Get Rooms by room Id
+	public static Room findByRoomId(int roomId) throws ValidationException, ServiceException {
+	    try {
+	        RoomValidator.validateRoomId(roomId);
+	        RoomDAO roomDAO = new RoomDAO();
+	        return roomDAO.findByRoomId(roomId);
+	    } catch (PersistenceException e) {
+	        throw new ServiceException("Error occurred while finding room by their id.", e);
+	    }
+	}
+	
+	//Delete Room
+	public void deleteRoom(int roomId) throws ValidationException, ServiceException {
+	    try {
+	    	RoomValidator.validateRoomId(roomId);
+	    	RoomDAO roomDAO = new RoomDAO();
+	    	roomDAO.deleteRoom(roomId);
+	    } catch (PersistenceException e) {
+	        throw new ServiceException("Error occurred while deleting room.", e);
+	    }
+	}
+	
 }

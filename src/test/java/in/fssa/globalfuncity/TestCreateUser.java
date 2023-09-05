@@ -1,14 +1,11 @@
 package in.fssa.globalfuncity;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
-import java.util.random.*;
-
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.User;
 import in.fssa.globalfuncity.service.UserService;
@@ -57,7 +54,7 @@ public class TestCreateUser {
 		String expectedMessage = "User object can not be null";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 
 	//Firstname Null
@@ -78,7 +75,7 @@ public class TestCreateUser {
 		String expectedMessage = "First Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 
 	//FirstName Empty
@@ -99,7 +96,7 @@ public class TestCreateUser {
 		String expectedMessage = "First Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 
 	//FirstName Pattern
@@ -120,70 +117,7 @@ public class TestCreateUser {
 		String expectedMessage = "First Name doesn't match the pattern";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
-	}
-
-	//Middlename Null
-	@Test
-	public void testCreateUserWithMiddleNameNull() {
-		UserService userService = new UserService();
-		User newUser = new User();
-        newUser.setFirstName("Sam");
-        newUser.setMiddleName(null);
-        newUser.setLastName("S");
-		newUser.setEmail("sam@gmail.com");
-		newUser.setPassword("Sam@2303");
-		newUser.setPhoneNumber(9923456787L);
-
-		Exception exception = assertThrows(Exception.class, () -> {
-			userService.createUser(newUser);
-		});
-		String expectedMessage = "Middle Name cannot be null or empty";
-		String actualMessage = exception.getMessage();
-
-		assertTrue(expectedMessage.equals(actualMessage));
-	}
-	
-	//MiddleName Empty
-	@Test
-	public void testCreateUserWithMiddleNameEmpty() {
-		UserService userService = new UserService();
-		User newUser = new User();
-        newUser.setFirstName("Sam");
-        newUser.setMiddleName("");
-        newUser.setLastName("S");
-		newUser.setEmail("sam@gmail.com");
-		newUser.setPassword("Sam@2303");
-		newUser.setPhoneNumber(9923456787L);
-
-		Exception exception = assertThrows(Exception.class, () -> {
-			userService.createUser(newUser);
-		});
-		String expectedMessage = "Middle Name cannot be null or empty";
-		String actualMessage = exception.getMessage();
-
-		assertTrue(expectedMessage.equals(actualMessage));
-	}
-	
-	//MiddleName Pattern
-	@Test
-	public void testCreateUserWithMiddleNamePattern() {
-		UserService userService = new UserService();
-		User newUser = new User();
-        newUser.setFirstName("sam");
-        newUser.setMiddleName("Ganesh123");
-        newUser.setLastName("S");
-		newUser.setEmail("sam@gmail.com");
-		newUser.setPassword("Sam@2303");
-		newUser.setPhoneNumber(9923456787L);
-
-		Exception exception = assertThrows(Exception.class, () -> {
-			userService.createUser(newUser);
-		});
-		String expectedMessage = "Middle Name doesn't match the pattern";
-		String actualMessage = exception.getMessage();
-
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//Lastname Null
@@ -204,7 +138,7 @@ public class TestCreateUser {
 		String expectedMessage = "Last Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//LastName Empty
@@ -225,7 +159,7 @@ public class TestCreateUser {
 		String expectedMessage = "Last Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//Email Null
@@ -247,7 +181,7 @@ public class TestCreateUser {
 		String expectedMessage = "Email cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 
 	//Email Empty
@@ -269,7 +203,7 @@ public class TestCreateUser {
 		String expectedMessage = "Email cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//Email Pattern
@@ -291,7 +225,7 @@ public class TestCreateUser {
 		String expectedMessage = "Email doesn't match the pattern";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//Email Already Exists
@@ -313,7 +247,7 @@ public class TestCreateUser {
 			String expectedMessage = "Email already exists";
 			String actualMessage = exception.getMessage();
 
-			assertTrue(expectedMessage.equals(actualMessage));
+			assertEquals(expectedMessage,actualMessage);
 		
 	}
 
@@ -335,7 +269,7 @@ public class TestCreateUser {
 		String expectedMessage = "Password cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 
 	//Password Empty
@@ -356,9 +290,8 @@ public class TestCreateUser {
 		String expectedMessage = "Password cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
-
 	
 	//Password Length
 	@Test
@@ -375,29 +308,32 @@ public class TestCreateUser {
 		Exception exception = assertThrows(Exception.class, () -> {
 			userService.createUser(newUser);
 		});
-		String expectedMessage = "Please give one uppercase, one lowercase, one special character and one number. Length of the password should be 8.";
+		String expectedMessage = "Password should be at least 8 characters long";
 		String actualMessage = exception.getMessage();
-		assertTrue(expectedMessage.equals(actualMessage));
+		
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
-	//Password Pattern
+	//With Valid Password Pattern
 	@Test
-	public void testCreateUserWithPasswordPattern() {
+	public void testCreateUserWithValidPasswordPattern() {
 		UserService userService = new UserService();
 		User newUser = new User();
         newUser.setFirstName("Sam");
         newUser.setMiddleName("ganesh");
         newUser.setLastName("S");
 		newUser.setEmail("sam@gmail.com");
-		newUser.setPassword("Vviosf@23");
+		newUser.setPassword("Vivo@1234");
 		newUser.setPhoneNumber(9923456787L);
 
 		Exception exception = assertThrows(Exception.class, () -> {
 			userService.createUser(newUser);
 		});
-		String expectedMessage = "Please give one uppercase, one lowercase, one special character and one number. Length of the password should be 8.";
+		String expectedMessage =  "Password must have at least 8 characters and "
+	    		+ "contain at least one uppercase letter, one lowercase letter, "
+	    		+ "and one special character.";
 		String actualMessage = exception.getMessage();
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 
 	
@@ -420,7 +356,7 @@ public class TestCreateUser {
 		String expectedMessage = "PhoneNumber should be in 10 Integers without country code.";
 		String actualMessage = exception.getMessage();
 	
-		  assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
     //InValid Phone Number
@@ -442,6 +378,6 @@ public class TestCreateUser {
         String expectedMessage = "PhoneNumber should be in 10 Integers without country code.";
         String actualMessage = exception.getMessage();
 
-        assertTrue(expectedMessage.equals(actualMessage));
+        assertEquals(expectedMessage,actualMessage);
     }
 }

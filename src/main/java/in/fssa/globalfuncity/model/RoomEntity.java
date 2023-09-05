@@ -7,8 +7,23 @@ public abstract class RoomEntity implements Comparable<RoomEntity> {
     private String roomName;
     private int noOfBeds;
     private int price;
+    private String roomImageUrl;
+    private String roomAmenities;
     private boolean isActiveRoom = true;
-	
+    
+    public String getRoomAmenities() {
+		return roomAmenities;
+	}
+	public void setRoomAmenities(String roomAmenities) {
+		this.roomAmenities = roomAmenities;
+	}
+    
+    public String getRoomImageUrl() {
+		return roomImageUrl;
+	}
+	public void setRoomImageUrl(String roomImageUrl) {
+		this.roomImageUrl = roomImageUrl;
+	}
 	public int getRoomId() {
 		return roomId;
 	}
@@ -49,12 +64,12 @@ public abstract class RoomEntity implements Comparable<RoomEntity> {
 	@Override
 	public String toString() {
 		return "RoomEntity [roomId=" + roomId + ", hotelName=" + hotelName + ", roomName=" + roomName + ", noOfBeds="
-				+ noOfBeds + ", price=" + price + ", isActiveRoom=" + isActiveRoom + "]";
+				+ noOfBeds + ", price=" + price + ", roomImageUrl=" + roomImageUrl + ", roomAmenities=" + roomAmenities
+				+ ", isActiveRoom=" + isActiveRoom + "]";
 	}
 	
 	@Override
 	public int compareTo(RoomEntity o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

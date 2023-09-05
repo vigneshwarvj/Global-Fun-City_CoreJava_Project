@@ -1,7 +1,5 @@
 package in.fssa.globalfuncity.model;
 
-import java.time.LocalDateTime;
-
 public class TicketEntity {
 	
 	private int ticketId;

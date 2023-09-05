@@ -36,7 +36,7 @@ public class TicketDAO {
             
         }catch(SQLException e) {
         	e.printStackTrace();
-        	throw new PersistenceException(e.getMessage());
+        	throw new PersistenceException(e);
         }finally {
 	        ConnectionUtil.close(conn, ps, rs);
 	    }
@@ -46,7 +46,7 @@ public class TicketDAO {
 	
 	
 	//Book a ticket
-	 public void bookNewTicket(Ticket ticket) throws PersistenceException, SQLException {
+	 public void bookNewTicket(Ticket ticket,int userId) throws PersistenceException, SQLException {
 	        Connection conn = null;
 	        PreparedStatement ps = null;
 	        
@@ -61,11 +61,12 @@ public class TicketDAO {
 	            ps.setString(2,ticket.getToDate() );
 	            ps.setInt(3, ticket.getNoOfAdult());
 	            ps.setInt(4, ticket.getNoOfChildren());
-	            ps.setInt(5, ticket.getCreatedBy());
+	            ps.setInt(5, userId);
 	            ps.setInt(6, ticket.getAdultPrice());
 	            ps.setInt(7, ticket.getChildrenPrice());
 	            int totalPrice = (ticket.getAdultPrice() * ticket.getNoOfAdult()) + (ticket.getChildrenPrice() * ticket.getNoOfChildren()); 
 	            ps.setInt(8, totalPrice);
+	          
 	            ps.executeUpdate();
 	            
 	            System.out.println("Ticket has been booked successfully");

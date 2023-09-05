@@ -74,7 +74,7 @@ public class UserExists {
 			rs = pre.executeQuery();
 			
 			if (!rs.next()) {
-				throw new ValidationException("Id doesn't exist");
+				throw new ValidationException("User Id doesn't exist");
 			}
 			
 		} catch (SQLException e) {

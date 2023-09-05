@@ -1,6 +1,10 @@
 package in.fssa.globalfuncity.validator;
 
 import java.util.regex.Pattern;
+
+import in.fssa.globalfuncity.dao.UserDAO;
+import in.fssa.globalfuncity.exception.PersistenceException;
+import in.fssa.globalfuncity.exception.ServiceException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.User;
 import in.fssa.globalfuncity.util.StringUtil;
@@ -14,7 +18,7 @@ public class UserValidator {
 	//Pattern for the Name, Email, Password.
 	private static final String NAME_PATTERN = "^[A-Za-z][A-Za-z\\\\s]*$";
 	private static final String EMAIL_PATTERN = "^[a-zA-Z0-9]+([a-zA-Z0-9_+\\-\\. ]*[a-zA-Z0-9]+)?@[a-zA-Z0-9]+([a-zA-Z0-9\\-\\.]*[a-zA-Z0-9])?\\.[a-zA-Z]{2,}$";
-	private static final String PASSWORD_PATTERN = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
+	private static final String PASSWORD_PATTERN = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=]).{8,}";
 	
     /**
      * Validates a User object's attributes.
@@ -29,7 +33,6 @@ public class UserValidator {
 			throw new ValidationException("User object can not be null");
 		}
 		validateFirstName(user.getFirstName());
-		validateMiddleName(user.getMiddleName());
 		validateLastName(user.getLastName());
 		validateEmail(user.getEmail());
 		validatePassword(user.getPassword());
@@ -38,18 +41,34 @@ public class UserValidator {
 	
     /**
      * Validates the ID of a User.
+     * @param name 
      *
      * @param userId The ID of the User.
      * @throws ValidationException If the ID is less than or equal to zero.
      */
 	
 	//UserID Validation
-	public static void validateId(int userId) throws ValidationException{
+	public static void validateId(String name, int userId) throws ValidationException{
 		if(userId <= 0) {
-			throw new ValidationException("Id can't be less than or equal to zero");
+			throw new ValidationException(name + " cannot be less than or equal to zero");
 		}
 	}
 
+	/**
+	 * Validates an ID to ensure it is not zero or negative.
+	 *
+	 * @param id The ID to validate.
+	 * @throws ValidationException  If the ID is invalid or does not exist.
+	 * @throws ServiceException
+	 * @throws PersistenceException If an error occurs during data persistence
+	 *                              checks.
+	 */
+	
+	public static void validateUserId(int userId) throws ValidationException, ServiceException {
+		validateId("User Id",userId);
+		UserExists.checkIdExists(userId);
+	}
+	
     /**
      * Validates the first name of a User.
      *
@@ -72,14 +91,14 @@ public class UserValidator {
      * @throws ValidationException If the middle name doesn't match the pattern.
      */
 	
-	//MiddleName Validation
-	public static void validateMiddleName(String middleName) throws ValidationException {
-		StringUtil.rejectIfInvalidString(middleName, "Middle Name");
-		if (!Pattern.matches(NAME_PATTERN, middleName)) {
-			throw new ValidationException("Middle Name doesn't match the pattern");
-		}
-		
-	}
+//	//MiddleName Validation
+//	public static void validateMiddleName(String middleName) throws ValidationException {
+//		StringUtil.rejectIfInvalidString(middleName, "Middle Name");
+//		if (!Pattern.matches(NAME_PATTERN, middleName)) {
+//			throw new ValidationException("Middle Name doesn't match the pattern");
+//		}
+//		
+//	}
 
     /**
      * Validates the last name of a User.
@@ -122,12 +141,12 @@ public class UserValidator {
 	//Password Validation
 	public static void validatePassword(String password) throws ValidationException {
 		StringUtil.rejectIfInvalidString(password, "Password");
-		 if (password.length() != 8) {
-		        throw new ValidationException("Please give one uppercase, one lowercase, one special character and one number. Length of the password should be 8.");
+		 if (password.length() < 8) {
+		        throw new ValidationException("Password should be at least 8 characters long");
 		    }
 
 		if (!Pattern.matches(PASSWORD_PATTERN, password)) {
-			throw new ValidationException("Please give one uppercase, one lowercase, one special character and one number. Length of the password should be 8.");
+			throw new ValidationException("Password must have at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one special character.");
 		}
 	}
 

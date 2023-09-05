@@ -25,7 +25,7 @@ public class TestCreateTicket {
 		ticket.setNoOfChildren(1);
 		ticket.setCreatedBy(1);
         assertDoesNotThrow(() -> {
-            ticketService.bookTicket(ticket);
+            ticketService.bookTicket(ticket, 2);
         });	
 	}
 	
@@ -34,7 +34,7 @@ public class TestCreateTicket {
 	public void testCreateTicketWithInvalidInput() {
 		TicketService ticketService = new TicketService();
 		Exception exception = assertThrows(ValidationException.class, () -> {
-			ticketService.bookTicket(null);
+			ticketService.bookTicket(null, 2);
 		});
 		String expectedMessage = "Ticket object cannot be null";
 		String actualMessage = exception.getMessage();
@@ -54,7 +54,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 1);
 	    });
 	    
 	    String expectedMessage = "Date cannot be null or empty";
@@ -75,7 +75,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 1);
 	    });
 	    
 	    String expectedMessage = "Date cannot be null or empty";
@@ -96,7 +96,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 2);
 	    });
 	    
 	    String expectedMessage = "Invalid date or Invalid date format (yyyy-MM-dd)";
@@ -117,7 +117,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 1);
 	    });
 	    
 	    String expectedMessage = "Invalid date or Invalid date format (yyyy-MM-dd)";
@@ -138,7 +138,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 2);
 	    });
 	    
 	    String expectedMessage = "Date cannot be null or empty";
@@ -159,7 +159,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 1);
 	    });
 	    
 	    String expectedMessage = "Date cannot be null or empty";
@@ -180,7 +180,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 1);
 	    });
 	    
 	    String expectedMessage = "Invalid date or Invalid date format (yyyy-MM-dd)";
@@ -201,7 +201,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 1);
 	    });
 	    
 	    String expectedMessage = "Invalid date or Invalid date format (yyyy-MM-dd)";
@@ -222,7 +222,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 2);
 	    });
 	    
 	    String expectedMessage = "No of Adult should be greater than 0";
@@ -243,7 +243,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 1);
 	    });
 	    
 	    String expectedMessage = "No of Adult should be greater than 0";
@@ -264,7 +264,7 @@ public class TestCreateTicket {
 	    ticket.setCreatedBy(1);
 	    
 	    Exception exception = assertThrows(ValidationException.class, () -> {
-	        ticketService.bookTicket(ticket);
+	        ticketService.bookTicket(ticket, 2);
 	    });
 	    
 	    String expectedMessage = "No of Children should be positive integer";

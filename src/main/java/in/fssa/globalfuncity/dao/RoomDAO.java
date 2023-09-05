@@ -31,7 +31,7 @@ public class RoomDAO {
 	    PreparedStatement ps = null;
         
         try {
-        	String query = "INSERT INTO rooms (hotel_name, room_name, no_of_beds, price) VALUES (?, ?, ?, ?)";
+        	String query = "INSERT INTO rooms (hotel_name, room_name, no_of_beds, price, room_image, room_amenities) VALUES (?, ?, ?, ?, ?, ?)";
         
         	conn = ConnectionUtil.getConnection();
 	        ps = conn.prepareStatement(query);
@@ -40,6 +40,8 @@ public class RoomDAO {
             ps.setString(2, room.getRoomName());
             ps.setInt(3, room.getNoOfBeds());
             ps.setInt(4, room.getPrice());
+            ps.setString(5, room.getRoomImageUrl());
+            ps.setString(6, room.getRoomAmenities());
             
             ps.executeUpdate();
 		
@@ -49,7 +51,7 @@ public class RoomDAO {
 		
            e.printStackTrace();
            System.out.println(e.getMessage());
-           throw new PersistenceException(e.getMessage());
+           throw new PersistenceException(e);
         
     }  finally {
     	
@@ -96,6 +98,16 @@ public class RoomDAO {
 	            values.add(updateRoom.getPrice());
 	        }
 
+	        if(updateRoom.getRoomImageUrl() != null) {
+	        	queryBuilder.append("room_image = ?, ");
+	        	values.add(updateRoom.getRoomImageUrl());
+	        }
+	        
+	        if(updateRoom.getRoomAmenities() != null) {
+	        	queryBuilder.append("room_amenities = ?, ");
+	        	values.add(updateRoom.getRoomAmenities());
+	        }
+	        
 	        queryBuilder.setLength(queryBuilder.length() - 2);
 	        queryBuilder.append(" WHERE room_id = ?");
 	        conn = ConnectionUtil.getConnection();
@@ -113,7 +125,7 @@ public class RoomDAO {
 	        	
 	        e.printStackTrace();
 	        System.out.println(e.getMessage());
-	        throw new PersistenceException(e.getMessage());
+	        throw new PersistenceException(e);
 	            
 	        } catch (RuntimeException er) {
 	        	
@@ -147,7 +159,7 @@ public class RoomDAO {
 
         try {
         	
-            String query = "SELECT room_id, hotel_name, room_name, no_of_beds, price FROM rooms";
+            String query = "SELECT room_id, hotel_name, room_name, no_of_beds, price, room_image, room_amenities  FROM rooms WHERE is_active = 1;";
             
             conn = ConnectionUtil.getConnection();
             ps = conn.prepareStatement(query);
@@ -160,13 +172,16 @@ public class RoomDAO {
                 room.setRoomName(rs.getString("room_name"));
                 room.setNoOfBeds(rs.getInt("no_of_beds"));
                 room.setPrice(rs.getInt("price"));
+                room.setRoomImageUrl(rs.getString("room_image"));
+                room.setRoomAmenities(rs.getString("room_amenities"));
+                
                 rooms.add(room);
             }
 
         } catch (SQLException e) {
         	
             e.printStackTrace();
-            throw new PersistenceException(e.getMessage());
+            throw new PersistenceException(e);
             
         } catch (RuntimeException er) {
         	
@@ -202,7 +217,7 @@ public class RoomDAO {
 
         try {
         	
-            String query = "SELECT room_id, hotel_name, room_name, no_of_beds, price FROM rooms WHERE no_of_beds = ?";
+            String query = "SELECT room_id, hotel_name, room_name, no_of_beds, price, room_image, room_amenities FROM rooms WHERE no_of_beds = ?";
             
             conn = ConnectionUtil.getConnection();
             ps = conn.prepareStatement(query);
@@ -218,6 +233,8 @@ public class RoomDAO {
                 room.setRoomName(rs.getString("room_name"));
                 room.setNoOfBeds(rs.getInt("no_of_beds"));
                 room.setPrice(rs.getInt("price"));
+                room.setRoomImageUrl(rs.getString("room_image"));
+                room.setRoomAmenities(rs.getString("room_amenities"));                
                 rooms.add(room);
             }
 
@@ -225,7 +242,7 @@ public class RoomDAO {
         	
             e.printStackTrace();
             System.out.println(e.getMessage());
-            throw new PersistenceException(e.getMessage());
+            throw new PersistenceException(e);
             
         } catch (RuntimeException er) {
         	
@@ -240,5 +257,89 @@ public class RoomDAO {
         
         return rooms;
     }	
+    
+    //List room by room id
+    
+    public Room findByRoomId(int roomId) throws PersistenceException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Room room = null;
+		try {
+			String query = "SELECT room_id, hotel_name, room_name, no_of_beds, price, room_image, room_amenities, is_active FROM rooms WHERE room_id = ?";
+			conn = ConnectionUtil.getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, roomId);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				room = new Room();
+				room.setRoomId(rs.getInt("room_id"));
+				room.setHotelName(rs.getString("hotel_name"));
+				room.setRoomName(rs.getString("room_name"));
+				room.setNoOfBeds(rs.getInt("no_of_beds"));
+				room.setPrice(rs.getInt("price"));
+                room.setRoomImageUrl(rs.getString("room_image"));
+                room.setRoomAmenities(rs.getString("room_amenities"));				
+				room.setActiveRoom(rs.getBoolean("is_active"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new PersistenceException(e);
+		} finally {
+			ConnectionUtil.close(conn, ps, rs);
+		}
+		return room;
+	}
+    
+    //Delete room;
+    public void deleteRoom(int roomId) throws PersistenceException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			String query = "UPDATE rooms SET is_active = 0 WHERE room_id = ? AND is_active = 1";
+			conn = ConnectionUtil.getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, roomId);
+			ps.executeUpdate();
+			System.out.println("Room has been deleted successfully");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new PersistenceException(e);
+		} finally {
+			ConnectionUtil.close(conn, ps, null);
+		}
+	}
+    
+	//GetLast Updated User
+	
+	public static int getLastUpdatedRoomId() throws PersistenceException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int roomId = 0;
+		
+		try {
+			
+			String query = "SELECT room_id FROM rooms WHERE is_active = 1 ORDER BY created_at DESC LIMIT 1";
+			conn = ConnectionUtil.getConnection();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				roomId = rs.getInt("room_id");
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new PersistenceException(e);
+			
+		} finally {
+			ConnectionUtil.close(conn, ps, rs);
+		}
+		return roomId;
+	}
 }
 

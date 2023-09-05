@@ -1,13 +1,16 @@
 package in.fssa.globalfuncity.validator;
 
 import java.util.regex.Pattern;
+
+import in.fssa.globalfuncity.exception.PersistenceException;
+import in.fssa.globalfuncity.exception.ServiceException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.Room;
 import in.fssa.globalfuncity.util.StringUtil;
 
 public class RoomValidator {
 
-    private static final String NAME_PATTERN = "^[A-Za-z][A-Za-z\\\\s]*$";
+    private static final String NAME_PATTERN = "^[A-Za-z]+(\\s?[A-Za-z]+)*$";
     
     /**
      * 
@@ -37,6 +40,12 @@ public class RoomValidator {
 		}
 	}
     
+	//Validate room Id
+	public static void validateRoomId(int roomId) throws ValidationException, ServiceException {
+		validateId(roomId);
+		RoomExists.checkIdExists(roomId);
+	}
+	
 	/**
 	 * 
 	 * @param hotelName

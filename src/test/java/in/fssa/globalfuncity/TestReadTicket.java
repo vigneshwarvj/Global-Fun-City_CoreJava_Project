@@ -16,9 +16,9 @@ import in.fssa.globalfuncity.exception.PersistenceException;
 import in.fssa.globalfuncity.model.Ticket;
 import in.fssa.globalfuncity.service.TicketService;
 
-public class TestGetAllTicket {
+public class TestReadTicket {
 
-	//To Getting the Booking History for the user 1. 
+	//Getting the Booking History for the user 1. 
 	@Test
 	public void getBookedHistoryByUserId(){
 		

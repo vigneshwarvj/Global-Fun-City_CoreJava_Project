@@ -9,6 +9,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
+import in.fssa.globalfuncity.dao.RoomDAO;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.Room;
 import in.fssa.globalfuncity.service.RoomService;
@@ -20,12 +21,14 @@ public class TestCreateRoom {
     public void testCreateRoomWithValidInput() {
         RoomService roomService = new RoomService();
         Room room = new Room();
-        room.setHotelName("Freshworks");
-        String roomName = generateRandomString(4);
+        room.setHotelName("Holiday Inn");
+        String roomName = generateRandomString(5);
         room.setRoomName(roomName);
         
-        room.setNoOfBeds(4);
+        room.setNoOfBeds(2);
         room.setPrice(60);
+        room.setRoomImageUrl("https://iili.io/HUUG2l1.jpg");
+        room.setRoomAmenities("Free-Wifi, Breakfast Free");
         assertDoesNotThrow(() -> {
             roomService.createRoom(room);
         });
@@ -41,7 +44,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Room object can not be null";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//Hotelname Null
@@ -60,7 +63,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Hotel Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//Hotelname Empty
@@ -79,7 +82,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Hotel Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//HotelName Pattern
@@ -98,7 +101,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Hotel Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//RoomName Null
@@ -117,7 +120,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Room Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//RoomName Empty
@@ -136,7 +139,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Room Name cannot be null or empty";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	}
 	
 	//RoomName Pattern
@@ -155,7 +158,8 @@ public class TestCreateRoom {
 		});
 		String expectedMessage = "Room Name doesn't match the pattern";
 		String actualMessage = exception.getMessage();
-		 assertEquals(expectedMessage,actualMessage);
+		
+		assertEquals(expectedMessage,actualMessage);
 
 	}
 
@@ -166,7 +170,10 @@ public class TestCreateRoom {
 		RoomService roomService = new RoomService();
 		Room room = new Room();
 		room.setHotelName("Freshworks");
-		room.setRoomName("Kelvi");
+		
+        String roomName = generateRandomString(5);
+        room.setRoomName(roomName);
+        
 		room.setNoOfBeds(2);
 		room.setPrice(40);
 		
@@ -176,7 +183,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Room Name already exists";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 		
 	}
 	
@@ -197,7 +204,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Number of beds should be greater than zero";
 		String actualMessage = exception.getMessage();
 	
-		  assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	
 	}
 	
@@ -218,7 +225,7 @@ public class TestCreateRoom {
 		String expectedMessage = "Price should be a positive integer and should be greater than zero";
 		String actualMessage = exception.getMessage();
 	
-		  assertTrue(expectedMessage.equals(actualMessage));
+		assertEquals(expectedMessage,actualMessage);
 	
 	}
 	
@@ -231,6 +238,5 @@ public class TestCreateRoom {
 	        randomString.append(characters.charAt(index));
 	    }
 	    return randomString.toString();
-	}
-
+	}    
 }

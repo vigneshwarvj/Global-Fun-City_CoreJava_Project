@@ -1,5 +1,7 @@
 package in.fssa.globalfuncity;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -10,22 +12,7 @@ import in.fssa.globalfuncity.model.Room;
 import in.fssa.globalfuncity.service.RoomService;
 
 
-public class TestGetAllRoom {
-
-	//Update Room
-	@Test
-	public void testUpdateRoom() throws ValidationException, PersistenceException {
-		
-		
-		
-		RoomService roomService = new RoomService();
-		Room room = new Room();
-		room.setHotelName("Freshworks");
-		room.setRoomName("Kelvi");
-		room.setNoOfBeds(4);
-		room.setPrice(80);
-		roomService.updateRoom(1, room);
-	}
+public class TestReadRoom {
 	
 	//Get All Rooms
     @Test
@@ -36,9 +23,20 @@ public class TestGetAllRoom {
 	}
     
     //Get All Rooms By No Of Beds
+    @Test
     public void getAllRoomsByNoOfBeds() throws PersistenceException {
     	RoomService roomService = new RoomService();
     	Set<Room> arr = roomService.getAllRoomsByNoOfBeds(4);
     	System.out.println(arr);
+    }
+    
+	//Get Room By Id
+    @Test
+    public void testGetRoomByRoomId() {
+        assertDoesNotThrow(() -> {
+        	RoomService roomService = new RoomService();
+            Room arr = RoomService.findByRoomId(2);
+            System.out.println(arr);
+        });
     }
 }
