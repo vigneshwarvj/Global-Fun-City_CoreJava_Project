@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import com.google.protobuf.ServiceException;
@@ -14,7 +15,9 @@ import com.google.protobuf.ServiceException;
 import in.fssa.globalfuncity.dao.TicketDAO;
 import in.fssa.globalfuncity.exception.PersistenceException;
 import in.fssa.globalfuncity.model.Ticket;
+import in.fssa.globalfuncity.model.User;
 import in.fssa.globalfuncity.service.TicketService;
+import in.fssa.globalfuncity.service.UserService;
 
 public class TestReadTicket {
 
@@ -46,4 +49,34 @@ public class TestReadTicket {
 //		assertEquals(exceptedMessage, actualMessage);
 //		
 //	}
+	
+	
+	@Test 
+	   void testGetTicketByTicketId() {
+		assertDoesNotThrow(() -> {
+			TicketService ticketService = new TicketService();
+			Ticket arr = ticketService.findByTicketId(1);
+			System.out.print(arr);
+		});
+	}
+	
+	@Test
+		void testGetNoOfNightsByTicketId() {
+		assertDoesNotThrow(() -> {
+			TicketService ticketService = new TicketService();
+			Ticket arr = ticketService.findNoOfNightsByTicketId(1, 3);
+			System.out.print(arr);
+		});
+	}
+	
+	//Find CheckInDate CheckOutDate By TicketId
+	@Test 
+	   void testGetCheckInDateCheckOutDateByTicketId() {
+		assertDoesNotThrow(() -> {
+			TicketService ticketService = new TicketService();
+			Ticket arr = ticketService.findByCheckInDateCheckOutDateByTicketId(1);
+			System.out.print(arr);
+		});
+	}
+	
 }

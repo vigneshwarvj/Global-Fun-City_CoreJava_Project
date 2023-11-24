@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import in.fssa.globalfuncity.exception.PersistenceException;
+import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.interfaces.UserInterface;
 import in.fssa.globalfuncity.model.User;
 import in.fssa.globalfuncity.util.ConnectionUtil;
@@ -109,7 +110,7 @@ public class UserDAO implements UserInterface<User>{
 
 	
 	//Find By Email Id
-	public User findByEmail(String email) throws PersistenceException {
+	public User findByEmail(String email) throws PersistenceException, ValidationException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -130,6 +131,9 @@ public class UserDAO implements UserInterface<User>{
 				user.setPassword(rs.getString("password"));
 				user.setPhoneNumber(rs.getLong("phone_no"));
 				user.setActive(rs.getBoolean("is_active"));
+				
+			} else {
+				throw new ValidationException("Invalid Email");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -210,6 +214,11 @@ public class UserDAO implements UserInterface<User>{
              	values.add(updatedUser.getLastName());
              }
              
+             if(updatedUser.getMiddleName() != null) {
+            	 queryBuilder.append("middle_name = ?, ");
+            	 values.add(updatedUser.getMiddleName());
+             }
+             
              if (updatedUser.getPassword() != null) {
                  queryBuilder.append("password = ?, ");
                  values.add(updatedUser.getPassword());
@@ -258,7 +267,7 @@ public class UserDAO implements UserInterface<User>{
 		
 		try {
 			
-			String query = "UPDATE users SET is_active = 0 WHERE user_id = ? AND is_active = 1";
+			String query = "DELETE FROM users WHERE user_id = ?";
 			conn = ConnectionUtil.getConnection();
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, userId);

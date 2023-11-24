@@ -25,7 +25,7 @@ public class TestCreateTicket {
 		ticket.setNoOfChildren(1);
 		ticket.setCreatedBy(1);
         assertDoesNotThrow(() -> {
-            ticketService.bookTicket(ticket, 2);
+            ticketService.bookTicket(ticket, 1);
         });	
 	}
 	

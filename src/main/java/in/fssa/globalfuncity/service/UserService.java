@@ -1,5 +1,6 @@
 package in.fssa.globalfuncity.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Set;
 
 import in.fssa.globalfuncity.dao.UserDAO;
@@ -7,6 +8,7 @@ import in.fssa.globalfuncity.exception.PersistenceException;
 import in.fssa.globalfuncity.exception.ServiceException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.User;
+import in.fssa.globalfuncity.util.PasswordUtil;
 import in.fssa.globalfuncity.validator.UserExists;
 import in.fssa.globalfuncity.validator.UserValidator;
 
@@ -18,13 +20,20 @@ public class UserService {
 	 * @throws ValidationException
 	 * @throws PersistenceException
 	 * @return
+	 * @throws ServiceException 
 	 */
 	
 	//Create User
-	public void createUser(User newUser) throws ValidationException, PersistenceException{
+	public void createUser(User newUser) throws ValidationException, PersistenceException, ServiceException{
 		UserValidator.Validate(newUser);
 		UserExists.emailExists(newUser.getEmail());
 		UserDAO userDAO = new UserDAO();
+		//
+//		try {
+//			newUser.setPassword(PasswordUtil.encryptPassword(newUser.getPassword()));
+//		} catch (NoSuchAlgorithmException e) {
+//			throw new ServiceException(e.getMessage());
+//		}
 		userDAO.create(newUser);
 	}
 

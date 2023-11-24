@@ -2,11 +2,13 @@ package in.fssa.globalfuncity;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import in.fssa.globalfuncity.exception.PersistenceException;
+import in.fssa.globalfuncity.exception.ServiceException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.model.Room;
 import in.fssa.globalfuncity.service.RoomService;
@@ -16,10 +18,12 @@ public class TestReadRoom {
 	
 	//Get All Rooms
     @Test
-	public void getAllRooms() throws PersistenceException {
+	public void getAllRooms() throws PersistenceException, ServiceException {
 		RoomService roomService = new RoomService();
-		Set<Room> arr = roomService.getAllRooms();
-		System.out.println(arr);
+		Set<Room> arr = roomService.getAllRooms("2023-10-05","2023-10-06");
+		for(Room room:arr) {
+		System.out.println(room);
+		}
 	}
     
     //Get All Rooms By No Of Beds

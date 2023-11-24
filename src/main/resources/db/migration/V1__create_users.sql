@@ -31,6 +31,8 @@ CREATE TABLE tickets (
     to_date DATE NOT NULL,
     no_of_adult INT NOT NULL,
     no_of_children INT,
+    no_of_days INT NOT NULL,
+    no_of_nights INT NOT NULL,
     created_by INT NOT NULL,
     adult_price INT NOT NULL,
     children_price INT,
@@ -46,7 +48,25 @@ CREATE TABLE rooms (
     room_name VARCHAR(255) NOT NULL,
     no_of_beds INT NOT NULL,
     price INT NOT NULL,
+    room_image VARCHAR(255) NOT NULL,
+    room_amenities VARCHAR(255), 
     is_active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+ 
+ -- users_rooms 
+CREATE TABLE users_rooms (
+    user_room_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    ticket_id INT NOT NULL,
+    room_booked_id INT not null,
+    from_date DATE NOT NULL,
+    to_date DATE NOT NULL,
+    room_name VARCHAR(50) NOT NULL,
+    no_of_nights INT NOT NULL,
+    total_price INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
+    FOREIGN KEY (ticket_id) REFERENCES tickets (ticket_id),
+    FOREIGN KEY (room_booked_id) REFERENCES rooms (room_id)
 );

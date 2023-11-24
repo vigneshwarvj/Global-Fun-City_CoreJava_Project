@@ -117,6 +117,26 @@ public class UserValidator {
 	}
 	
     /**
+     * Validates the phone number of a User.
+     *
+     * @param phoneNumber The phone number of the User.
+     * @throws ValidationException If the phone number doesn't match the pattern.
+     */
+	
+	//PhoneNumber Validation
+	public static void validatePhoneNumber(long phoneNumber) throws ValidationException {
+	    String phoneNumberStr = String.valueOf(phoneNumber);
+
+	    if (phoneNumberStr.length() != 10) {
+	        throw new ValidationException("Phone Number should be in 10 digits without country code.");
+	    }
+
+	    if (phoneNumber < 6000000000L || phoneNumber >= 10000000000L) {
+	        throw new ValidationException("Phone Number should be in 10 digits without country code.");
+	    }
+	}
+	
+    /**
      * Validates the email of a User.
      *
      * @param email The email of the User.
@@ -148,26 +168,6 @@ public class UserValidator {
 		if (!Pattern.matches(PASSWORD_PATTERN, password)) {
 			throw new ValidationException("Password must have at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one special character.");
 		}
-	}
-
-    /**
-     * Validates the phone number of a User.
-     *
-     * @param phoneNumber The phone number of the User.
-     * @throws ValidationException If the phone number doesn't match the pattern.
-     */
-	
-	//PhoneNumber Validation
-	public static void validatePhoneNumber(long phoneNumber) throws ValidationException {
-	    String phoneNumberStr = String.valueOf(phoneNumber);
-
-	    if (phoneNumberStr.length() != 10) {
-	        throw new ValidationException("PhoneNumber should be in 10 Integers without country code.");
-	    }
-
-	    if (phoneNumber < 6000000000L || phoneNumber >= 10000000000L) {
-	        throw new ValidationException("PhoneNumber should be in 10 Integers without country code.");
-	    }
 	}
 	
 }

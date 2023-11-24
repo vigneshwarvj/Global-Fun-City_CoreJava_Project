@@ -1,5 +1,7 @@
 package in.fssa.globalfuncity.model;
 
+import java.sql.Timestamp;
+
 public class TicketEntity {
 	
 	private int ticketId;
@@ -7,12 +9,15 @@ public class TicketEntity {
     private String toDate;
     private int noOfAdult;
     private int noOfChildren;
-    private int createdBy;
+    private int noOfDays;
+    private int noOfNights;
+	private int createdBy;
     private int adultPrice;
     private int childrenPrice;
     private int totalPrice;
+    private Timestamp createdAt;
 
-    public int getTotalPrice() {
+	public int getTotalPrice() {
 		return totalPrice;
 	}
 	public void setTotalPrice(int totalPrice) {
@@ -48,6 +53,18 @@ public class TicketEntity {
 	public void setNoOfChildren(int noOfChildren) {
 		this.noOfChildren = noOfChildren;
 	}
+	public int getNoOfDays() {
+		return noOfDays;
+	}
+	public void setNoOfDays(int noOfDays) {
+		this.noOfDays = noOfDays;
+	}
+	public int getNoOfNights() {
+		return noOfNights;
+	}
+	public void setNoOfNights(int noOfNights) {
+		this.noOfNights = noOfNights;
+	}
 	public int getCreatedBy() {
 		return createdBy;
 	}
@@ -66,13 +83,20 @@ public class TicketEntity {
 	public void setChildrenPrice(int childrenPrice) {
 		this.childrenPrice = childrenPrice;
 	}
+    public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	
 	@Override
 	public String toString() {
 		return "TicketEntity [ticketId=" + ticketId + ", fromDate=" + fromDate + ", toDate=" + toDate + ", noOfAdult="
-				+ noOfAdult + ", noOfChildren=" + noOfChildren + ", createdBy=" + createdBy + ", adultPrice="
-				+ adultPrice + ", childrenPrice=" + childrenPrice + ", totalPrice=" + totalPrice + "]";
+				+ noOfAdult + ", noOfChildren=" + noOfChildren + ", noOfDays=" + noOfDays + ", noOfNights=" + noOfNights
+				+ ", createdBy=" + createdBy + ", adultPrice=" + adultPrice + ", childrenPrice=" + childrenPrice
+				+ ", totalPrice=" + totalPrice + ", createdAt=" + createdAt + "]";
 	}
 
 	 public int compareTo(TicketEntity other) {

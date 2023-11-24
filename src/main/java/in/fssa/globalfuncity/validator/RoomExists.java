@@ -8,13 +8,24 @@ import java.sql.SQLException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.util.ConnectionUtil;
 
-public class RoomExists {
 	/**
-	 * 
-	 * @param id
-	 * @throws ValidationException
+	 * The `RoomExists` class provides utility methods for checking the existence of rooms and room names
+	 * in the database. It helps validate room IDs and room names to ensure they are unique and available for use.
 	 */
+
+public class RoomExists {
+	
+    /**
+     * Checks if a room with the given ID exists and is marked as active in the database.
+     *
+     * @param id The unique identifier of the room to be checked.
+     * @throws ValidationException If the room ID doesn't exist or is marked as inactive.
+     */
+	
 	public static void checkIdExists(int id) throws ValidationException {
+		
+        // Queries the database to check if the room ID exists and is active.
+        // Throws a ValidationException if the room doesn't exist or is inactive.
 		
 		Connection conn = null;
 		PreparedStatement pre = null;
@@ -44,7 +55,17 @@ public class RoomExists {
 		
 	}
 	
+    /**
+     * Checks if a room with the given room name already exists in the database.
+     *
+     * @param roomName The name of the room to be checked for existence.
+     * @throws ValidationException If a room with the same name already exists.
+     */
+	
 	public static void roomNameExists(String roomName) throws ValidationException {
+		
+        // Queries the database to check if a room with the same name already exists.
+        // Throws a ValidationException if a room with the same name is found.
 		
 		Connection conn = null;
 		PreparedStatement pre = null;

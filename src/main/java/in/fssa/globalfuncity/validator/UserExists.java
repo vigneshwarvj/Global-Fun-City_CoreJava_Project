@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import in.fssa.globalfuncity.exception.PersistenceException;
 import in.fssa.globalfuncity.exception.ValidationException;
 import in.fssa.globalfuncity.util.ConnectionUtil;
+import in.fssa.globalfuncity.util.Logger;
 
 /**
  * The UserExists class provides methods to check the existence of user data in the database.
@@ -20,9 +22,10 @@ public class UserExists {
      *
      * @param email The email to check for existence.
      * @throws ValidationException If the email already exists in the database.
+     * @throws PersistenceException 
      */
 	
-	public static void emailExists(String email) throws ValidationException {
+	public static void emailExists(String email) throws ValidationException, PersistenceException {
 		
 		Connection conn = null;
 		PreparedStatement pre = null;
@@ -42,9 +45,8 @@ public class UserExists {
 			
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			throw new RuntimeException();
+			Logger.error(e);
+			throw new PersistenceException(e);
 			
 		} finally {
 			ConnectionUtil.close(conn, pre, rs);
