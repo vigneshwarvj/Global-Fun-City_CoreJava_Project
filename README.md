@@ -1,4 +1,15 @@
-# Global Fun City
+# 🎡 Global Fun City Project - Readme
+
+Welcome to the repository for the Global Fun City project by [Vigneshwar (Body)](https://github.com/vigneshwarvj)
+for [FSSA - Batch 3](https://github.com/fssa-batch3). This repository contains the source code and documentation for the
+project.
+
+## 📖 Project Overview
+
+Global Fun City aims to create a Ticket booking and Room Booking in an Amusement park using Core Java. The goal is to provide a user-friendly
+interface for Ticket Booking and Room Booking. And to Buy our Merchandise.
+
+For in-depth information about the project, please refer below Database Design and Project Setup
 
 ## Database Design
 
@@ -275,3 +286,15 @@ graph TD;
   D --> E(Retrieve  result  from  Database)
   C -- Invalid --> F(Validation Exception)
 ```
+
+## 🔍 Sonar Cloud Analysis
+
+[Sonar Cloud Analysis ↗️](https://sonarcloud.io/summary/new_code?id=fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2&metric=bugs)](https://sonarcloud.io/summary/new_code?id=fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=fssa-batch3_sec_b_vigneshwar.vijayakumar__corejava_project_2)
+
+## 💬 Discussion
+
+If you have any questions, suggestions, or feedback about the project, please [Mail me 📧](mailto:vigneshwarjosephite@gmail.com) or [LinkedIn ↗️](https://in.linkedin.com/in/vigneshwar-vijayakumar-58583724b).
