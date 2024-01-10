@@ -1,8 +1,6 @@
 # 🎡 Global Fun City Project - Readme
 
-Welcome to the repository for the Global Fun City project by [Vigneshwar (Body)](https://github.com/vigneshwarvj)
-for [FSSA - Batch 3](https://github.com/fssa-batch3). This repository contains the source code and documentation for the
-project.
+Welcome to the repository for the Global Fun City project by [Vigneshwar Vijayakumar (Body)](https://in.linkedin.com/in/vigneshwar-vijayakumar-58583724b). This repository contains the source code and documentation for the project.
 
 ## 📖 Project Overview
 
